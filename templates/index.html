@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+</head>
+<body>
+    <h1>Weather App</h1>
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="city">Enter a City:</label>
+        <input type="text" id="city" name="city" value="{{ city }}" required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    <!-- JavaScript to clear the city input field -->
+    <script>
+        // Function to clear the city input field
+        function clearCityField() {
+            console.log("Clearing the city field"); // Add this line
+            document.getElementById('city').value = '';
+        }
+    </script>
+</body>
+</html>
