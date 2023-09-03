@@ -43,3 +43,4 @@ def get_weather_data(city):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
