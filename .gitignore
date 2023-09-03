@@ -4,3 +4,4 @@ config.py
 /scripts/terraform-editor-sa-key.json
 /terraform/.terraform
 /terraform/.terraform.lock.hcl
+.idea
