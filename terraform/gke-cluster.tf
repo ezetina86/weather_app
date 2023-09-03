@@ -1,0 +1,64 @@
+resource "google_container_cluster" "weather-cluster" {
+  name     = "weather-cluster"
+  location = var.region
+
+  # Configure the node pool
+  node_pool {
+    name       = "default-pool"
+
+    node_config {
+      machine_type = var.machine_type
+      preemptible  = false
+      disk_size_gb = 10
+      disk_type    = "pd-standard"
+      image_type   = "COS"
+    }
+
+    # Add additional node pool configurations as needed
+  }
+
+  # Cluster autoscaling settings
+  node_locations = ["us-south1-a", "us-south1-b", "us-south1-c"]
+
+  # Optional: Enable HTTP load balancing (if needed)
+  addons_config {
+    http_load_balancing {
+      disabled = false
+    }
+  }
+}
+
+# Configure Kubernetes Deployment
+resource "kubernetes_deployment_v1" "weather-app-deployment" {
+  metadata {
+    name = "weather-app-deployment"
+  }
+
+  spec {
+    replicas = 1
+
+    selector {
+      match_labels = {
+        app = "weather-app"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "weather-app"
+        }
+      }
+
+      spec {
+        container {
+          name  = "weather-app"
+          image = "gcr.io/ezetina-gcp-project/weather-app"
+          port {
+            container_port = 8080
+          }
+        }
+      }
+    }
+  }
+}
