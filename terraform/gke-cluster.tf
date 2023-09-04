@@ -29,7 +29,7 @@ resource "google_container_cluster" "weather-cluster" {
 }
 
 # Configure Kubernetes Deployment
-resource "kubernetes_deployment_v1" "weather-app-deployment" {
+resource "kubernetes_deployment" "weather-app-deployment" {
   metadata {
     name = "weather-app-deployment"
   }

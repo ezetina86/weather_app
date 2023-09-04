@@ -3,10 +3,23 @@ import requests
 import json
 from config import WEATHER_API_KEY
 
-
 # Load the JSON file into a list of dictionaries
 with open('us-cities-demographics.json', 'r') as json_file:
     us_cities_data = json.load(json_file)
+
+
+# Function to filter JSON data
+def filter_json_data(json_data):
+    filtered_data = []
+    for item in json_data:
+        filtered_item = {"city": item["city"]}
+        filtered_data.append(filtered_item)
+
+    return filtered_data
+
+
+# Filter the JSON data to keep only the "city" field
+us_cities_data = filter_json_data(us_cities_data)
 
 app = Flask(__name__)
 
@@ -41,6 +54,5 @@ def get_weather_data(city):
     return data
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)

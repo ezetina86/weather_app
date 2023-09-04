@@ -1,4 +1,6 @@
-__pycache__
+Dockerfile
+README.md
 *.pyc
-.git
-venv
+*.pyo
+*.pyd
+__pycache__
