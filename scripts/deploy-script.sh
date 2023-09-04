@@ -19,6 +19,10 @@ IMAGE_TAG="latest"
 # Set Artifact repo
 ARTIFACT_REPO="weather-docker-repo"
 
+# Set Secrets info
+SECRET="WEATHER_API_KEY"
+COMPUTE_SA="763286202887-compute@developer.gserviceaccount.com"
+
 # Step 1: Enable Necessary Google Cloud APIs
 echo "Step 1: Enable Necessary Google Cloud APIs"
 gcloud services enable container.googleapis.com
@@ -78,3 +82,8 @@ else
 echo "Service account key file created: $KEY_FILE"
 fi
 
+# Step 7 Provide Access to secrets
+gcloud secrets add-iam-policy-binding $SECRET \
+  --member serviceAccount:$COMPUTE_SA \
+  --role roles/secretmanager.secretAccessor \
+  --project=$PROJECT_ID
