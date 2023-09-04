@@ -4,6 +4,8 @@
 echo "Step 0: Enable Necessary Google Cloud APIs"
 gcloud services enable container.googleapis.com
 gcloud services enable containerregistry.googleapis.com
+gcloud services enable artifactregistry.googleapis.com
+
 
 # Step 1: Authenticate and Set Up Google Cloud SDK
 echo "Step 1: Authenticate and Set Up Google Cloud SDK"
@@ -25,21 +27,29 @@ IMAGE_NAME="weather-app"
 IMAGE_TAG="latest"
 
 # Step 2: Build and Tag Docker Image
-echo "Step 2: Build and Tag Docker Image"
-docker build -t $IMAGE_NAME .
-docker tag $IMAGE_NAME gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+#echo "Step 2: Build and Tag Docker Image"
+#docker build -t $IMAGE_NAME .
+#docker tag $IMAGE_NAME gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
 
-# Step 3: Push Docker Image to Google Container Registry (GCR)
-echo "Step 3: Push Docker Image to Google Container Registry (GCR)"
-gcloud auth configure-docker
-docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+# Step 2: Send image to Artifact Registry
+echo "Step 2: Send image to Artifact Registry"
+gcloud artifacts repositories create weather-docker-repo --repository-format=docker \
+--location=us-south1 --description="Weather repository"
+gcloud artifacts repositories list
+gcloud auth configure-docker us-south1-docker.pkg.dev
+docker build --platform=linux/amd64 -t $IMAGE_NAME:$IMAGE_TAG .
+docker tag $IMAGE_NAME \
+us-south1-docker.pkg.dev/$PROJECT_ID/weather-docker-repo/$IMAGE_NAME:$IMAGE_TAG
 
-echo "Docker image $IMAGE_NAME:$IMAGE_TAG has been pushed to GCR."
+# Step 3: Push Docker Image to Google Artifact Registry
+echo "Step 3: Push Docker Image to Google Artifact Registry"
+docker push us-south1-docker.pkg.dev/$PROJECT_ID/weather-docker-repo/$IMAGE_NAME:$IMAGE_TAG
+echo "Docker image $IMAGE_NAME:$IMAGE_TAG has been pushed to Artifact Registry."
 
 # Step 4: Check if the Google Cloud Storage Bucket Exists
 echo "Step 4: Check if the Google Cloud Storage Bucket Exists"
 
-if gsutil ls -b gs://BUCKET_NAME >/dev/null 2>&1; then
+if gsutil ls -b gs://$BUCKET_NAME >/dev/null 2>&1; then
   echo "Bucket $BUCKET_NAME already exists."
 else
 # Step 5: Create a Google Cloud Storage Bucket

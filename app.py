@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+import os
 import requests
 import json
 from config import WEATHER_API_KEY
@@ -55,4 +56,4 @@ def get_weather_data(city):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))

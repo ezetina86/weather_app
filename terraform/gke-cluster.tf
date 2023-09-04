@@ -14,7 +14,6 @@ resource "google_container_cluster" "weather-cluster" {
       image_type   = "COS"
     }
 
-    # Add additional node pool configurations as needed
   }
 
   # Cluster autoscaling settings
