@@ -52,7 +52,7 @@ resource "kubernetes_deployment" "weather-app-deployment" {
       spec {
         container {
           name  = "weather-app"
-          image = "gcr.io/ezetina-gcp-project/weather-app"
+          image = "us-south1-docker.pkg.dev/ezetina-gcp-project/weather-docker-repo/weather-app"
           port {
             container_port = 8080
           }
