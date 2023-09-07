@@ -13,5 +13,11 @@ COPY . .
 # Install application dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Run test
+RUN python3 test_app.py
+
+# Create Graphs
+RUN python3 diagram.py
+
 # Define the command to run your Flask app
 CMD exec gunicorn --bind :8080 --workers 1 --threads 8 app:app
