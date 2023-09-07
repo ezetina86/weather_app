@@ -63,7 +63,7 @@ Before running this application, you need to have the following installed:
    python app.py
 
    ```
-2. Open a web browser and navigate to http://localhost:5000/ to access the application.
+2. Open a web browser and navigate to http://localhost:8080/ to access the application.
 3. Enter the name of a city in the USA into the input field and click the "Get Weather" button.
 4. If the city is valid, you will see weather information displayed on the page.
 5. If the city is not valid, you will see an error message, and the input field will be cleared.
