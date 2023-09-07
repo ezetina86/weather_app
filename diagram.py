@@ -9,12 +9,7 @@ from diagrams.gcp.devtools import Build
 from diagrams.gcp.compute import Run
 from diagrams.gcp.operations import Monitoring
 
-graph_attr = {
-    "fontsize": "45",
-    "bgcolor": "transparent"
-}
-
-with Diagram(show=False, graph_attr= graph_attr):
+with Diagram(filename="weather_app", show=False):
 
     with Cluster("WebApp"):
         python = Python("WeatherApp")
