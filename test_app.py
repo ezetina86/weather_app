@@ -1,6 +1,7 @@
 import unittest
 from app import app
 
+
 class FlaskAppTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -30,6 +31,7 @@ class FlaskAppTestCase(unittest.TestCase):
         response = self.app.post('/', data={'city': 'San Francisco!'})
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Invalid city. Please enter a valid US city.', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()

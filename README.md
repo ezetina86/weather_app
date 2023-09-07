@@ -8,6 +8,7 @@ This is a simple Flask web application that allows users to check the weather fo
 - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [Architecture](#architecture)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -53,7 +54,8 @@ Before running this application, you need to have the following installed:
    ```bash
    pip install -r requirements.txt
    ```
-
+## Architecture
+![image](weather_app.png)
 ### Usage
 
 1. Run the Flask app:
