@@ -2,4 +2,4 @@ Flask==2.1.1
 requests==2.26.0
 gunicorn==21.2.0
 google-cloud-secret-manager==2.16.3
-diagrams=0.23.3
+diagrams==0.23.3
