@@ -68,7 +68,7 @@ Before running this application, you need to have the following installed:
 4. If the city is valid, you will see weather information displayed on the page.
 5. If the city is not valid, you will see an error message, and the input field will be cleared.
 
-### UsaContributingge
+### Contribute
 
 Contributions are welcome! If you would like to contribute to this project, please follow these steps:
 
@@ -78,5 +78,11 @@ Contributions are welcome! If you would like to contribute to this project, plea
 4. Commit your changes with descriptive commit messages.
 5. Push your changes to your fork.
 6. Submit a pull request to the main repository.
+
+
+## Live version
+
+At this moment the app is running in Cloud Run, click [here](https://weather-app-7iuruz2npa-uc.a.run.app)
+to try it!
 
 
