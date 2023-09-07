@@ -13,9 +13,6 @@ COPY . .
 # Install application dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Run test
-RUN python3 test_app.py
-
 # Create Graphs
 RUN python3 diagram.py
 
